@@ -1,0 +1,218 @@
+{
+  "info": {
+    "name": "Event Booking API",
+    "_postman_id": "a1b2c3d4-e5f6-7890-abcd-1234567890ab",
+    "description": "Postman collection for Event Booking System APIs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "User APIs",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [{"key":"Content-Type","value":"application/json"}],
+            "body": {
+              "mode":"raw",
+              "raw":"{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"password\": \"password\",\n  \"password_confirmation\": \"password\",\n  \"phone\": \"1234567890\",\n  \"role\": \"customer\"\n}"
+            },
+            "url": {"raw":"{{base_url}}/api/register","host":["{{base_url}}"],"path":["api","register"]}
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [{"key":"Content-Type","value":"application/json"}],
+            "body": {
+              "mode":"raw",
+              "raw":"{\n  \"email\": \"john@example.com\",\n  \"password\": \"password\"\n}"
+            },
+            "url": {"raw":"{{base_url}}/api/login","host":["{{base_url}}"],"path":["api","login"]}
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [{"key":"Authorization","value":"Bearer {{token}}"}],
+            "url": {"raw":"{{base_url}}/api/logout","host":["{{base_url}}"],"path":["api","logout"]}
+          }
+        },
+        {
+          "name": "Get Me",
+          "request": {
+            "method": "GET",
+            "header": [{"key":"Authorization","value":"Bearer {{token}}"}],
+            "url": {"raw":"{{base_url}}/api/me","host":["{{base_url}}"],"path":["api","me"]}
+          }
+        }
+      ]
+    },
+    {
+      "name": "Event APIs",
+      "item": [
+        {
+          "name": "List Events",
+          "request": {
+            "method": "GET",
+            "header": [{"key":"Authorization","value":"Bearer {{token}}"}],
+            "url": {
+              "raw":"{{base_url}}/api/events?per_page=10&title=Concert&date=2025-10-01&location=NYC",
+              "host":["{{base_url}}"],
+              "path":["api","events"]
+            }
+          }
+        },
+        {
+          "name": "Get Event",
+          "request": {
+            "method": "GET",
+            "header": [{"key":"Authorization","value":"Bearer {{token}}"}],
+            "url": {"raw":"{{base_url}}/api/events/{{event_id}}","host":["{{base_url}}"],"path":["api","events","{{event_id}}"]}
+          }
+        },
+        {
+          "name": "Create Event",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key":"Content-Type","value":"application/json"},
+              {"key":"Authorization","value":"Bearer {{token}}"}
+            ],
+            "body": {
+              "mode":"raw",
+              "raw":"{\n  \"title\":\"Concert\",\n  \"description\":\"Live concert\",\n  \"date\":\"2025-10-01\",\n  \"location\":\"NYC\"\n}"
+            },
+            "url": {"raw":"{{base_url}}/api/events","host":["{{base_url}}"],"path":["api","events"]}
+          }
+        },
+        {
+          "name": "Update Event",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {"key":"Content-Type","value":"application/json"},
+              {"key":"Authorization","value":"Bearer {{token}}"}
+            ],
+            "body": {
+              "mode":"raw",
+              "raw":"{\n  \"title\":\"Updated Concert\"\n}"
+            },
+            "url": {"raw":"{{base_url}}/api/events/{{event_id}}","host":["{{base_url}}"],"path":["api","events","{{event_id}}"]}
+          }
+        },
+        {
+          "name": "Delete Event",
+          "request": {
+            "method": "DELETE",
+            "header": [{"key":"Authorization","value":"Bearer {{token}}"}],
+            "url": {"raw":"{{base_url}}/api/events/{{event_id}}","host":["{{base_url}}"],"path":["api","events","{{event_id}}"]}
+          }
+        }
+      ]
+    },
+    {
+      "name": "Ticket APIs",
+      "item": [
+        {
+          "name": "Create Ticket",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key":"Content-Type","value":"application/json"},
+              {"key":"Authorization","value":"Bearer {{token}}"}
+            ],
+            "body": {
+              "mode":"raw",
+              "raw":"{\n  \"type\":\"VIP\",\n  \"price\":150.0,\n  \"quantity\":50\n}"
+            },
+            "url": {"raw":"{{base_url}}/api/events/{{event_id}}/tickets","host":["{{base_url}}"],"path":["api","events","{{event_id}}","tickets"]}
+          }
+        },
+        {
+          "name": "Update Ticket",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {"key":"Content-Type","value":"application/json"},
+              {"key":"Authorization","value":"Bearer {{token}}"}
+            ],
+            "body": {
+              "mode":"raw",
+              "raw":"{\n  \"price\":200.0\n}"
+            },
+            "url": {"raw":"{{base_url}}/api/tickets/{{ticket_id}}","host":["{{base_url}}"],"path":["api","tickets","{{ticket_id}}"]}
+          }
+        },
+        {
+          "name": "Delete Ticket",
+          "request": {
+            "method": "DELETE",
+            "header": [{"key":"Authorization","value":"Bearer {{token}}"}],
+            "url": {"raw":"{{base_url}}/api/tickets/{{ticket_id}}","host":["{{base_url}}"],"path":["api","tickets","{{ticket_id}}"]}
+          }
+        }
+      ]
+    },
+    {
+      "name": "Booking APIs",
+      "item": [
+        {
+          "name": "Create Booking",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key":"Content-Type","value":"application/json"},
+              {"key":"Authorization","value":"Bearer {{token}}"}
+            ],
+            "body": {
+              "mode":"raw",
+              "raw":"{\n  \"quantity\":2\n}"
+            },
+            "url": {"raw":"{{base_url}}/api/tickets/{{ticket_id}}/bookings","host":["{{base_url}}"],"path":["api","tickets","{{ticket_id}}","bookings"]}
+          }
+        },
+        {
+          "name": "List Bookings",
+          "request": {
+            "method": "GET",
+            "header": [{"key":"Authorization","value":"Bearer {{token}}"}],
+            "url": {"raw":"{{base_url}}/api/bookings","host":["{{base_url}}"],"path":["api","bookings"]}
+          }
+        },
+        {
+          "name": "Cancel Booking",
+          "request": {
+            "method": "PUT",
+            "header": [{"key":"Authorization","value":"Bearer {{token}}"}],
+            "url": {"raw":"{{base_url}}/api/bookings/{{booking_id}}/cancel","host":["{{base_url}}"],"path":["api","bookings","{{booking_id}}","cancel"]}
+          }
+        }
+      ]
+    },
+    {
+      "name": "Payment APIs",
+      "item": [
+        {
+          "name": "Process Payment",
+          "request": {
+            "method": "POST",
+            "header": [{"key":"Authorization","value":"Bearer {{token}}"}],
+            "url": {"raw":"{{base_url}}/api/bookings/{{booking_id}}/payment","host":["{{base_url}}"],"path":["api","bookings","{{booking_id}}","payment"]}
+          }
+        },
+        {
+          "name": "Get Payment",
+          "request": {
+            "method": "GET",
+            "header": [{"key":"Authorization","value":"Bearer {{token}}"}],
+            "url": {"raw":"{{base_url}}/api/payments/{{payment_id}}","host":["{{base_url}}"],"path":["api","payments","{{payment_id}}"]}
+          }
+        }
+      ]
+    }
+  ]
+}
