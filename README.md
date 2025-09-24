@@ -44,8 +44,9 @@ php artisan serve
 The backend will be available at http://127.0.0.1:8000
 
 # 9. Testing the API
-- Use Postman or any API client
-- Authentication handled via Laravel Sanctum
+- Use Postman for API testing
+- import the event-booking-postman.json in postman
+- Authentication handled via Laravel Sanctum. Login user then use the api.
 Example endpoints:
   POST   /api/login       -> User login
   GET    /api/events      -> List events
